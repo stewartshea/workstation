@@ -32,3 +32,5 @@
     - name: install vscode
       include_tasks: vscode.yml 
       become: yes
+    - name: Set git email addy
+      command: git config --global user.email "{{ git_email }}"
