@@ -28,7 +28,6 @@
       become: yes
       with_items: 
         - snap-store
-        - slack --classic
         - spotify
         - rambox --classic
     - name: add flathub repo
@@ -41,6 +40,7 @@
       with_items: 
         - chat.rocket.RocketChat
         - org.darktable.Darktable
+        - com.slack.Slack
     - name: install npm items
       npm: 
         name: "{{ item }}"
