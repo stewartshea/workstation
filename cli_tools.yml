@@ -1,0 +1,17 @@
+---
+- name: Get terraform version
+  shell: curl https://github.com/hashicorp/terraform/releases/latest   | grep -Po 'tag/v\K[^"]+' 
+  register: terraform_version
+- name: Download terraform binary
+  get_url:
+    url: https://releases.hashicorp.com/terraform/{{ terraform_version.stdout }}/terraform_{{ terraform_version.stdout }}_linux_amd64.zip
+    dest: /tmp/tf.zip
+    mode: 0777
+- name: unzip terraform binary
+  unarchive: 
+    src: /tmp/tf.zip
+    dest: /usr/local/bin/
+  become: yes
+- name: set perms on terraform
+  command: chmod 777 /usr/local/bin/terraform
+  become: yes

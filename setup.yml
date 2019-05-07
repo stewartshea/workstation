@@ -4,6 +4,8 @@
   vars_files:
     vars.yml
   tasks: 
+    - name: add necesssary repos
+      import_tasks: repos.yml
     - name: install base packages
       dnf:
         name: "{{ item }}"
@@ -16,6 +18,7 @@
         - npm
         - gnome-tweak-tool
         - flatpak
+        - vivaldi
       become: yes
     - name: create snap symlink for classic support
       file: 
@@ -55,3 +58,5 @@
       become: yes
     - name: Set git email addy
       command: git config --global user.email "{{ git_email }}"
+    - name: Install tools
+      import_tasks: cli_tools.yml
