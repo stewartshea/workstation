@@ -13,6 +13,9 @@
         - docker
         - snapd
         - powertop
+        - npm
+        - gnome-tweak-tool
+        - flatpak
       become: yes
     - name: create snap symlink for classic support
       file: 
@@ -26,9 +29,27 @@
       with_items: 
         - snap-store
         - slack --classic
-        - rocketchat-desktop
         - spotify
-        - rambox
+        - rambox --classic
+    - name: add flathub repo
+      command: flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+      become: yes
+    - name: 
+      flatpak: 
+        name: "{{ item }}"
+        state: present
+      with_items: 
+        - chat.rocket.RocketChat
+        - org.darktable.Darktable
+    - name: install npm items
+      npm: 
+        name: "{{ item }}"
+        state: present
+        global: no
+        path: ~/npm
+      with_items: 
+        - electron
+        - notion
     - name: install vscode
       include_tasks: vscode.yml 
       become: yes
