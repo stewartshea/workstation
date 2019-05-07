@@ -1,6 +1,8 @@
 ---
 - hosts: localhost
   connection: local
+  vars_files:
+    vars.yml
   tasks: 
     - name: install base packages
       dnf:
@@ -10,6 +12,7 @@
         - guake
         - docker
         - snapd
+        - powertop
       become: yes
     - name: create snap symlink for classic support
       file: 
@@ -25,6 +28,7 @@
         - slack --classic
         - rocketchat-desktop
         - spotify
+        - rambox
     - name: install vscode
       include_tasks: vscode.yml 
       become: yes
