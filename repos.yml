@@ -1,4 +1,7 @@
 ---
-- name: vivaldi repo
-  command: dnf config-manager --add-repo https://repo.vivaldi.com/archive/vivaldi-fedora.repo
+- name: repo list
+  command: "dnf config-manager --add-repo {{ item }}"
   become: yes
+  with_items: 
+    - https://repo.vivaldi.com/archive/vivaldi-fedora.repo
+    - http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
