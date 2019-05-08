@@ -5,3 +5,6 @@
   with_items: 
     - https://repo.vivaldi.com/archive/vivaldi-fedora.repo
     - http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
+- name: update virtualbox repo until 30 is available
+  command: sed -i "s/\$releasever/29/g" /etc/yum.repos.d/virtualbox.repo
+  become: yes

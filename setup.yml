@@ -27,7 +27,7 @@
         - dkms 
         - elfutils-libelf-devel 
         - qt5-qtx11extras
-        - VirtualBox*
+        - "VirtualBox-6*"
       become: yes
     - name: create snap symlink for classic support
       file: 
@@ -69,3 +69,5 @@
       command: git config --global user.email "{{ git_email }}"
     - name: Install tools
       import_tasks: cli_tools.yml
+    # - name: install nvidia drivers    ## Doesn't seem to work yet
+    #   import_tasks: nvidia.yml
