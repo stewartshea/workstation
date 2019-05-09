@@ -18,4 +18,5 @@ sudo dnf install ansible -y
 Install the apps. 
 
 ## Notes
-Using `snap` requires a session logout/login. 
+- Using `snap` requires a session logout/login. 
+- Disable secureboot :( 
