@@ -30,6 +30,8 @@
         - "VirtualBox-6*"
         - ImageMagick
         - google-cloud-sdk
+        - protobuf
+        - kubectl
       become: yes
     - name: create snap symlink for classic support
       file: 

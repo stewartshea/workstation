@@ -58,5 +58,5 @@
   become: yes
   with_items: 
     - oc
-    - kubectl
+  #  - kubectl
     - helm

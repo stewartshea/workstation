@@ -16,3 +16,4 @@
   become: true
   with_items: 
     - google-cloud-sdk.repo
+    - kubernetes.repo
