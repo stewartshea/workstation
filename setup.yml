@@ -29,6 +29,7 @@
         - qt5-qtx11extras
         - "VirtualBox-6*"
         - ImageMagick
+        - google-cloud-sdk
       become: yes
     - name: create snap symlink for classic support
       file: 

@@ -1,4 +1,5 @@
 ---
+### Note: Much of this might be simplified with the github api to determine the release download url
 - name: Get terraform version
   shell: curl https://github.com/hashicorp/terraform/releases/latest   | grep -Po 'tag/v\K[^"]+' 
   register: terraform_version
@@ -15,6 +16,26 @@
 - name: set perms on terraform
   command: chmod 777 /usr/local/bin/terraform
   become: yes
+- name: Get helm version
+  shell: curl https://github.com/helm/helm/releases/latest   | grep -Po 'tag/v\K[^"]+' 
+  register: helm_version
+- name: Get helm download URL
+  shell: curl https://github.com/helm/helm/releases/tag/v"{{ helm_version.stdout }}" | grep "{{ helm_version.stdout }}" | grep linux-amd64.tar.gz | grep href | grep googleapis | awk -F "\"" '{print $2}'
+  register: helm_download_url
+- name: Download helm binary
+  get_url:
+    url: "{{ helm_download_url.stdout }}"
+    dest: /tmp/helm.tar.gz
+    mode: 0777
+- name: unzip helm binary
+  unarchive: 
+    src: /tmp/helm.tar.gz
+    dest: /tmp
+    extra_opts: [--strip-components=1]
+    exclude:
+      - LICENSE
+      - tiller
+      - README.md
 - name: Get oc version
   shell: curl https://github.com/openshift/origin/releases/latest   | grep -Po 'tag/v\K[^"]+' 
   register: oc_version
@@ -32,12 +53,10 @@
     dest: /tmp
     extra_opts: [--strip-components=1]
   become: yes
-- name: move oc file
+- name: move binaries file
   shell: "mv /tmp/{{ item }} /usr/local/bin/{{ item }} && chmod 777 /usr/local/bin/{{ item }}"
   become: yes
   with_items: 
     - oc
     - kubectl
-# - name: set perms on oc
-#   command: "chmod 777 /usr/local/bin/{{ item }}"
-#   become: yes
+    - helm

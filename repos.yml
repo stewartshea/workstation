@@ -1,5 +1,5 @@
 ---
-- name: repo list
+- name: add repos via url
   command: "dnf config-manager --add-repo {{ item }}"
   become: yes
   with_items: 
@@ -8,3 +8,11 @@
 - name: update virtualbox repo until 30 is available
   command: sed -i "s/\$releasever/29/g" /etc/yum.repos.d/virtualbox.repo
   become: yes
+- name: add repos via file
+  copy: 
+    src: "files/{{ item }}"
+    dest: "/etc/yum.repos.d/{{ item }}"
+    mode: 0644
+  become: true
+  with_items: 
+    - google-cloud-sdk.repo
