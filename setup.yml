@@ -28,6 +28,7 @@
         - elfutils-libelf-devel 
         - qt5-qtx11extras
         - "VirtualBox-6*"
+        - ImageMagick
       become: yes
     - name: create snap symlink for classic support
       file: 
@@ -41,7 +42,7 @@
       with_items: 
         - snap-store
         - spotify
-        - rambox --classic
+        - ramboxpro
     - name: add flathub repo
       command: flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
       become: yes
@@ -57,11 +58,15 @@
       npm: 
         name: "{{ item }}"
         state: present
-        global: no
-        path: ~/npm
+        global: yes
+      #  path: ~/npm
       with_items: 
-        - electron
-        - notion
+        - nativefier 
+      become: yes
+    - name: use nativefier to create apps
+      include_tasks: nativefier.yml
+      with_items: 
+        - { name: notion, url: "https://notion.so"}
     - name: install vscode
       include_tasks: vscode.yml 
       become: yes
