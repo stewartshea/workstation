@@ -32,6 +32,7 @@
         - google-cloud-sdk
         - protobuf
         - kubectl
+        - gnome-shell-extension-topicons-plus
       become: yes
     - name: create snap symlink for classic support
       file: 
