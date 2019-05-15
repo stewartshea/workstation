@@ -17,3 +17,7 @@
   with_items: 
     - google-cloud-sdk.repo
     - kubernetes.repo
+- name: add rpmfusion
+  shell: "rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm"
+ 
+  

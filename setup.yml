@@ -33,7 +33,7 @@
         - protobuf
         - kubectl
         - gnome-shell-extension-topicons-plus
-        - vokoscreen
+        - simplescreenrecorder
         - krita
         - openshot
       become: yes
