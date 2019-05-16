@@ -1,0 +1,7 @@
+---
+- name: Add resolution startup script 
+  copy: 
+    src: files/screen_res.sh
+    dest: /etc/rc.d/init.d/screen_res
+    mode: 0755
+  become: yes
