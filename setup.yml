@@ -8,10 +8,7 @@
       import_tasks: repos.yml
     - name: install base packages
       dnf:
-        name: "{{ item }}"
-        state: present 
-        update_cache: yes
-      with_items: 
+        name:
         - guake
         - docker
         - snapd
@@ -32,19 +29,32 @@
         - google-cloud-sdk
         - protobuf
         - kubectl
-        - gnome-shell-extension-topicons-plus
         - simplescreenrecorder
         - krita
         - openshot
-        - kazam
         - obs-studio
+        - strongswan
+        - NetworkManager-strongswan-gnome 
+        - transmission
+        - remmina
+        state: present 
+        update_cache: yes
       become: yes
       ignore_errors: yes
       tags:
         - packages
-    - name: create docker group and add user to it
-      shell: |
-        groupadd docker && usermod -aG docker $USER
+    - name: create docker group
+      group: 
+        name: docker
+        state: present
+      become: yes
+      tags:
+        - packages
+    - name: add user to docker group
+      user: 
+        name: "{{ username }}"
+        group: docker
+        state: present
       become: yes
       tags:
         - packages
@@ -107,10 +117,12 @@
     - name: Install tools
       import_tasks: cli_tools.yml
       tags:
-        - packages
+        - cli_tools
     - name: Add startup scripts
       import_tasks: startup_scripts.yml
       tags:
         - config
+    - name: Set nautilus to show path/address
+      command: gsettings set org.gnome.nautilus.preferences always-use-location-entry true
     # - name: install nvidia drivers    ## Doesn't seem to work yet
     #   import_tasks: nvidia.yml
