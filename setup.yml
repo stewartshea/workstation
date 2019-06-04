@@ -37,6 +37,7 @@
         - NetworkManager-strongswan-gnome 
         - transmission
         - remmina
+        - vlc
         state: present 
         update_cache: yes
       become: yes
@@ -107,7 +108,6 @@
         - packages
     - name: install vscode
       include_tasks: vscode.yml 
-      become: yes
       tags:
         - packages
     - name: Set git email addy
