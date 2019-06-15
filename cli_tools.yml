@@ -1,11 +1,16 @@
 ---
 ### Note: Much of this might be simplified with the github api to determine the release download url
-- name: Get terraform version
-  shell: curl https://github.com/hashicorp/terraform/releases/latest   | grep -Po 'tag/v\K[^"]+' 
-  register: terraform_version
-- name: Download terraform binary
+# - name: Get terraform version
+#   shell: curl https://github.com/hashicorp/terraform/releases/latest   | grep -Po 'tag/v\K[^"]+' 
+#   register: terraform_version
+# - name: Download terraform binary
+#   get_url:
+#     url: https://releases.hashicorp.com/terraform/{{ terraform_version.stdout }}/terraform_{{ terraform_version.stdout }}_linux_amd64.zip
+#     dest: /tmp/tf.zip
+#     mode: 0777
+- name: Download terraform binary ## Hardcoding to 0.11 for now
   get_url:
-    url: https://releases.hashicorp.com/terraform/{{ terraform_version.stdout }}/terraform_{{ terraform_version.stdout }}_linux_amd64.zip
+    url: https://github.com/hashicorp/terraform/archive/v0.11.14.zip
     dest: /tmp/tf.zip
     mode: 0777
 - name: unzip terraform binary

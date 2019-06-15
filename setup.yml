@@ -38,6 +38,7 @@
         - transmission
         - remmina
         - vlc
+        - docker-compose
         state: present 
         update_cache: yes
       become: yes
