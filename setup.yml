@@ -39,6 +39,7 @@
         - remmina
         - vlc
         - docker-compose
+        - flat-remix-gnome
         state: present 
         update_cache: yes
       become: yes
