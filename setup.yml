@@ -77,6 +77,7 @@
         - snap-store
         - spotify
         - ramboxpro
+        - opera
       tags:
         - packages
     - name: add flathub repo
