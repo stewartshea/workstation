@@ -47,6 +47,10 @@
       ignore_errors: yes
       tags:
         - packages
+    - name: adobe reader
+      import_tasks: adobe.yml
+      tags: 
+        - adobe
     - name: create docker group
       group: 
         name: docker
