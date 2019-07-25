@@ -41,6 +41,7 @@
         - docker-compose
         - flat-remix-gnome
         - hub
+        - simple-scan
         state: present 
         update_cache: yes
       become: yes
