@@ -42,6 +42,7 @@
         - flat-remix-gnome
         - hub
         - simple-scan
+        - python3-devel
         state: present 
         update_cache: yes
       become: yes

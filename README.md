@@ -20,3 +20,7 @@ Install the apps.
 ## Notes
 - Using `snap` requires a session logout/login. 
 - Disable secureboot :( 
+- For GNS3, use pip and a specific version
+    ```
+    pip3 install gns3-gui==2.1.21
+    ```
