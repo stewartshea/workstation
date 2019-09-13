@@ -43,6 +43,7 @@
         - hub
         - simple-scan
         - python3-devel
+        - vinagre
         state: present 
         update_cache: yes
       become: yes
